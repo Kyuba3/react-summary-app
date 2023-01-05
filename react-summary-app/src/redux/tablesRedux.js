@@ -13,6 +13,21 @@ export const fetchTables = () => {
   }
 };
 
+export const editTable = (payload) => {
+  return(dispatch) => {
+    const options = {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload),
+    };
+
+    fetch('http://localhost:3131/tables', options)
+      .then(() => dispatch(editTable(payload)));
+  };
+};
+
 const tablesReducer = (statePart = [], action) => {
   switch (action.type) {
     case UPDATE_TABLE:

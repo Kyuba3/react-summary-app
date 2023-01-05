@@ -1,7 +1,9 @@
+import EditTableForm from '../features/EditTableForm';
+
 
 const Table = () => {
   return(
-    <h1>Table</h1>
+    <EditTableForm />
   )
 }
 
