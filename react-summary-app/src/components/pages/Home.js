@@ -1,5 +1,6 @@
 import { Card, Container, Row,} from "react-bootstrap";
 import RenderAllTables from "../features/RenderAllTables";
+import Footer from "../views/Footer";
 import Header from "../views/Header";
 
 const Home = () => {
@@ -12,6 +13,7 @@ const Home = () => {
             </Card.Title>
           </Row>
           <RenderAllTables />
+          <Footer />
         </Container>
     );
 }
