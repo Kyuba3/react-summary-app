@@ -1,20 +1,19 @@
-import { Card, Container, Row,} from "react-bootstrap";
-import RenderAllTables from "../features/RenderAllTables";
-import Footer from "../views/Footer";
-import Header from "../views/Header";
+import { Col, Row,} from "react-bootstrap";
+import { useSelector } from "react-redux";
+import { getAllTables } from "../../redux/tablesRedux";
+import List from "../views/List";
 
 const Home = () => {
+  
+  const tablesList = useSelector(getAllTables);
+
     return (
-        <Container>
-          <Row className="justify-content-between col-12">
-            <Header />
-            <Card.Title className="col-md-auto fs-2 mt-4">
-              All tables
-            </Card.Title>
-          </Row>
-          <RenderAllTables />
-          <Footer />
-        </Container>
+        <Row>
+          <Col>
+            <h1>All tables</h1>
+            {tablesList.map(tableList => <List props={tableList} key={tableList.id} />)}
+          </Col>
+        </Row>
     );
 }
 

@@ -1,23 +1,28 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams, Navigate } from "react-router-dom";
-import getTableById, { editTable } from '../../redux/tablesRedux';
+import { useNavigate, useParams} from "react-router-dom";
+import getTableById, { editTableRequest } from '../../redux/tablesRedux';
 import TableForm from '../features/TableForm';
+import { Spinner } from "react-bootstrap";
 
 
 const EditTableForm = () => {
 
     const { tableId } = useParams();
-    const tableById = useSelector(({tables}) => getTableById({tables}, tableId));
+    const tableById = useSelector(state => getTableById(state, tableId));
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const handleSubmit = table => {
-        dispatch(editTable({...table}));
+        dispatch(editTableRequest({...table, tableId}));
         navigate('/');
+    };
+
+    if (!tableById) {
+      return ( 
+        <Spinner animation="border" variant="primary" />
+      );
     }
-
-    if (!tableById) return <Navigate to='/' />
-
+    
     return (
         <>
           <TableForm 

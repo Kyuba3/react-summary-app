@@ -1,4 +1,4 @@
-import { Container, Card, Row, Button, Nav} from "react-bootstrap"
+import { Container, Card, Row, Button, Nav, Spinner} from "react-bootstrap"
 import { useSelector } from "react-redux"
 import { NavLink } from "react-router-dom";
 import {getAllTables} from "../../redux/tablesRedux";
@@ -7,11 +7,16 @@ import {getAllTables} from "../../redux/tablesRedux";
 const RenderAllTables = () => {
 
     const tables = useSelector(getAllTables);
-    console.log("tables:" + tables);
+
+    if (tables.length === 0) {
+      return (
+        <Spinner animation="border" variant="primary" />
+      )
+    }
 
     return(
         <Container>
-          <Row className="d-flex flex-row col-12 pt-2">
+          <Row className="d-flex flex-row col-12 pt-3">
             {tables.map(table =>(
               <Card key={table.id} className="d-inline-flex flex-row justify-content-center pt-5">
                 <Card.Title className="col-2 fs-3"><b>Table </b>{table.id}</Card.Title>
